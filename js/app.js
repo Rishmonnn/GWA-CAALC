@@ -1,94 +1,11 @@
 var KEY = "gwa-calc-v6";
-var SAMPLE = [
-  {
-    name: "Y2S2 (SY 25-26 SEM II)",
-    subs: [
-      {
-        code: "BES 024",
-        name: "Computer Aided Drafting",
-        units: 1,
-        grade: 1.75,
-        on: true,
-        auto: true,
-        ps: 60,
-        per: [
-          { n: "P1", g: 77.7, w: 33 },
-          { n: "P2", g: 90.24, w: 33 },
-          { n: "P3", g: 86.1, w: 34 },
-        ],
-      },
-      {
-        code: "CPE 038",
-        name: "Software Design",
-        units: 4,
-        grade: 2.0,
-        on: true,
-      },
-      {
-        code: "CPE 039",
-        name: "Fundamentals of Electronic Circuits",
-        units: 4,
-        grade: 1.75,
-        on: true,
-        auto: true,
-        ps: 60,
-        per: [
-          { n: "P1", g: 92.4, w: 33 },
-          { n: "P2", g: 93.04, w: 33 },
-          { n: "P3", g: 75.7, w: 34 },
-        ],
-      },
-      {
-        code: "ECO 017",
-        name: "Engineering Economics",
-        units: 3,
-        grade: 2.5,
-        on: true,
-      },
-      {
-        code: "GEN 010",
-        name: "Gender and Society",
-        units: 3,
-        grade: 1.5,
-        on: true,
-      },
-      {
-        code: "MAT 042",
-        name: "Discrete Math",
-        units: 3,
-        grade: 2.0,
-        on: true,
-      },
-      {
-        code: "MAT 120",
-        name: "Numerical Methods",
-        units: 3,
-        grade: 1.25,
-        on: true,
-      },
-      {
-        code: "PED 031",
-        name: "Physical Activities Toward Health and Fitness 2",
-        units: 2,
-        grade: 1.25,
-        on: true,
-      },
-      {
-        code: "SSP 006",
-        name: "Student Success Program 2 (Complete, no grade)",
-        units: 1,
-        grade: 0,
-        on: false,
-      },
-    ],
-  },
-];
+var BLANK = [{ name: "New semester", subs: [] }];
 var data;
 try {
   data = JSON.parse(localStorage.getItem(KEY));
 } catch (e) {}
 if (!Array.isArray(data) || !data.length)
-  data = JSON.parse(JSON.stringify(SAMPLE));
+  data = JSON.parse(JSON.stringify(BLANK));
 function save() {
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
@@ -459,7 +376,7 @@ root.addEventListener("click", function (e) {
   else commit();
 });
 document.getElementById("reset").onclick = function () {
-  data = [{ name: "New semester", subs: [] }];
+  data = JSON.parse(JSON.stringify(BLANK));
   save();
   render();
   commit();
